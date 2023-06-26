@@ -203,6 +203,7 @@ RESULT eFCCServiceManager::tryFCCService(const eServiceReference &sref, ePtr<iPl
 	std::map< ePtr<iPlayableService>, FCCServiceElem >::iterator it;
 	for (it = m_FCCServices.begin();it != m_FCCServices.end();++it)
 	{
+	
 		if (it->second.m_state == fcc_state_decoding)
 		{
 			ASSERT(get_fcc_decoding == 0);
@@ -255,13 +256,14 @@ RESULT eFCCServiceManager::tryFCCService(const eServiceReference &sref, ePtr<iPl
 
 	if (new_service)
 	{
+		eDebug("[eFCCServiceManager] tryFCCService new_service");
 		service = new_service;
 	}
-
 	else /* If new service is not found in FCC service list, cleanup all FCC prepared services and get new FCC service. */
 	{
 		cleanupFCCService();
 		m_core->stopService();
+		eDebug("[eFCCServiceManager] tryFCCService checkAvailable : %s", sref.toString().c_str());
 		if (eFCCServiceManager::checkAvailable(sref))
 		{
 			ASSERT(m_core->m_servicehandler);
@@ -276,6 +278,7 @@ RESULT eFCCServiceManager::tryFCCService(const eServiceReference &sref, ePtr<iPl
 		}
 		else
 		{
+			eDebug("[eFCCServiceManager] tryFCCService ret -1");
 			return -1;
 		}
 	}
