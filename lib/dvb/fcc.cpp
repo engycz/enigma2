@@ -189,7 +189,7 @@ RESULT eFCCServiceManager::stopFCCService()
 
 RESULT eFCCServiceManager::tryFCCService(const eServiceReference &sref, ePtr<iPlayableService> &service)
 {
-	eDebug("[eFCCServiceManager] tryFCCService sref : %s", sref->toString().c_str());
+	eDebug("[eFCCServiceManager] tryFCCService sref : %s", sref.toString().c_str());
 	if (!isEnable())
 		return -1;
 
