@@ -4,7 +4,7 @@
 #include <lib/base/eerror.h>
 #include <lib/python/python.h>
 
-//#define FCC_DEBUG
+#define FCC_DEBUG
 
 void FCCServiceChannels::addFCCService(const eServiceReference &service)
 {
@@ -189,6 +189,7 @@ RESULT eFCCServiceManager::stopFCCService()
 
 RESULT eFCCServiceManager::tryFCCService(const eServiceReference &sref, ePtr<iPlayableService> &service)
 {
+	eDebug("[eFCCServiceManager] tryFCCService sref : %s", sref->toString().c_str());
 	if (!isEnable())
 		return -1;
 
